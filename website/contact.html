@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Year 9 Engineering</title>
+    <style>
+        :root {
+            --teal: #14B8A6;
+            --teal-dark: #0D9488;
+            --charcoal: #2C3E50;
+            --charcoal-light: #34495E;
+            --burnt-orange: #E67E22;
+            --light-bg: #F8F9FA;
+            --white: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+
+        nav {
+            background-color: var(--charcoal);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 1rem 0;
+            text-decoration: none;
+        }
+
+        nav .logo span {
+            color: var(--teal);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 1rem 0;
+            display: block;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: var(--teal);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--charcoal) 100%);
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-card h3 {
+            color: var(--charcoal);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card a {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-card a:hover {
+            color: var(--teal-dark);
+            text-decoration: underline;
+        }
+
+        .info-box {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 3rem auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .info-box h3 {
+            color: var(--charcoal);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .detail-item {
+            text-align: center;
+        }
+
+        .detail-item .label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-item .value {
+            color: var(--charcoal);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .help-section {
+            background: var(--white);
+            padding: 4rem 0;
+        }
+
+        .help-section h2 {
+            font-size: 2.5rem;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .help-section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--teal);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .faq-item {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--teal);
+        }
+
+        .faq-item h4 {
+            color: var(--charcoal);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-item p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        footer {
+            background: var(--charcoal);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--charcoal);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Year 9 <span>Engineering</span></a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Student Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>📧 Get in Touch</h1>
+            <p>Have questions about the course? Need help with your project? Here's how to reach out!</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="info-box">
+                <h3>Teacher Information</h3>
+                <p style="color: var(--text-light); margin-bottom: 2rem;">
+                    <strong>Prahran High School</strong><br>
+                    Year 9 Engineering & Digital Technologies
+                </p>
+                
+                <div class="info-details">
+                    <div class="detail-item">
+                        <div class="label">Email</div>
+                        <div class="value">
+                            <a href="mailto:teacher@prahranhs.vic.edu.au" style="color: var(--teal); text-decoration: none;">
+                                teacher@prahranhs.vic.edu.au
+                            </a>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Office Hours</div>
+                        <div class="value">Mon-Fri<br>8:30 AM - 3:30 PM</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Room</div>
+                        <div class="value">Technology Centre<br>Room TBA</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="icon">📚</div>
+                    <h3>Google Classroom</h3>
+                    <p>
+                        Submit assignments, check grades, and view announcements on our class Google Classroom page.
+                    </p>
+                    <a href="https://classroom.google.com" target="_blank">Go to Classroom →</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="icon">💬</div>
+                    <h3>Class Discussion</h3>
+                    <p>
+                        Join class discussions, ask questions, and help your classmates on our class forum.
+                    </p>
+                    <p style="color: var(--teal); font-weight: 600;">Available via Google Classroom</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="icon">🆘</div>
+                    <h3>Need Help?</h3>
+                    <p>
+                        Stuck on a coding problem? Come see me during office hours or before/after class for one-on-one help.
+                    </p>
+                    <p style="color: var(--teal); font-weight: 600;">Drop-in support available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="help-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h4>❓ How do I access the Python lessons?</h4>
+                    <p>
+                        Navigate to the Python Programming unit page from the home page. All lesson materials, 
+                        guides, and video tutorials are available there for download or viewing.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>❓ What if I'm stuck on my adventure game project?</h4>
+                    <p>
+                        First, check the Python Quick Reference Guide for syntax help. If you're still stuck, 
+                        come see me during office hours, send me an email with your specific question, or 
+                        post in the Google Classroom discussion board where classmates might help too!
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>❓ When is the Python project due?</h4>
+                    <p>
+                        Project due dates are posted on Google Classroom and announced in class. Generally, 
+                        you'll have 5-6 weeks to complete your text adventure game after the planning phase.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>❓ Can I work on my project at home?</h4>
+                    <p>
+                        Absolutely! Python is free to install. Download it from python.org and use any text 
+                        editor like IDLE (comes with Python), VS Code, or PyCharm. All project files should 
+                        be backed up regularly.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>❓ How can I submit my project?</h4>
+                    <p>
+                        Projects are submitted through Google Classroom. Make sure your Python file (.py) is 
+                        named correctly (usually FirstName_LastName_Project.py) and includes all required 
+                        comments and documentation.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>❓ Can I get extra help outside of class?</h4>
+                    <p>
+                        Yes! I'm available during office hours (8:30 AM - 3:30 PM, Monday-Friday) for 
+                        one-on-one help. You can also email me to set up a specific time if those hours 
+                        don't work for you.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>❓ What resources are available for extension students?</h4>
+                    <p>
+                        Extension students can access advanced topics like object-oriented programming in 
+                        the Python unit resources. Additional challenge problems and project ideas are 
+                        available upon request.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Prahran High School - Year 9 Engineering</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                <a href="index.html" style="color: var(--teal); text-decoration: none;">← Back to Home</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
