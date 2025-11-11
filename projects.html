@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Projects | Year 9 Engineering</title>
+    <style>
+        :root {
+            --teal: #14B8A6;
+            --teal-dark: #0D9488;
+            --charcoal: #2C3E50;
+            --charcoal-light: #34495E;
+            --burnt-orange: #E67E22;
+            --light-bg: #F8F9FA;
+            --white: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+
+        nav {
+            background-color: var(--charcoal);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 1rem 0;
+            text-decoration: none;
+        }
+
+        nav .logo span {
+            color: var(--teal);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 1rem 0;
+            display: block;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: var(--teal);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--charcoal) 100%);
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--teal);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--burnt-orange) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.95);
+            color: var(--charcoal);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            color: var(--charcoal);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-meta {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: var(--light-bg);
+            color: var(--text-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .cta-section {
+            background: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-box {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 2px dashed var(--teal);
+        }
+
+        .cta-box h3 {
+            color: var(--charcoal);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--teal);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--teal-dark);
+        }
+
+        footer {
+            background: var(--charcoal);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--charcoal);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Year 9 <span>Engineering</span></a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Student Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>🎮 Student Projects</h1>
+            <p>Explore amazing projects created by Year 9 Engineering students. Get inspired by your classmates' creativity and technical skills!</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Featured Python Projects</h2>
+
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        🚀
+                        <span class="project-badge">Featured</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Space Explorer Adventure</h3>
+                        <div class="project-meta">
+                            <span>👤 Student Example</span>
+                            <span>📅 Term 4, 2024</span>
+                        </div>
+                        <p>
+                            An exciting text adventure where players navigate through space, make critical decisions about their mission, and discover new planets. Features multiple endings based on player choices and resource management.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Variables</span>
+                            <span class="tag">Conditionals</span>
+                            <span class="tag">Random Events</span>
+                            <span class="tag">Multiple Endings</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        🏰
+                        <span class="project-badge">Advanced</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Dungeon Quest</h3>
+                        <div class="project-meta">
+                            <span>👤 Student Example</span>
+                            <span>📅 Term 4, 2024</span>
+                        </div>
+                        <p>
+                            A fantasy adventure game with inventory management, character stats tracking, and challenging puzzles. Demonstrates advanced use of dictionaries and functions for complex game mechanics.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Dictionaries</span>
+                            <span class="tag">Functions</span>
+                            <span class="tag">Inventory System</span>
+                            <span class="tag">Combat System</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        🔍
+                    </div>
+                    <div class="project-content">
+                        <h3>Mystery Mansion</h3>
+                        <div class="project-meta">
+                            <span>👤 Student Example</span>
+                            <span>📅 Term 4, 2024</span>
+                        </div>
+                        <p>
+                            A detective-themed mystery game where players collect clues, interrogate suspects, and solve the case. Features random events that add replay value and dynamic storytelling.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Clue System</span>
+                            <span class="tag">Random Events</span>
+                            <span class="tag">Logic Puzzles</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🌊</div>
+                    <div class="project-content">
+                        <h3>Ocean Survival</h3>
+                        <div class="project-meta">
+                            <span>👤 Student Example</span>
+                            <span>📅 Term 4, 2024</span>
+                        </div>
+                        <p>
+                            Survive on a deserted island after a shipwreck! Manage resources, craft tools, and find a way to escape. Features a health system and time-based challenges.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Resource Management</span>
+                            <span class="tag">Crafting System</span>
+                            <span class="tag">Health Tracking</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🧙</div>
+                    <div class="project-content">
+                        <h3>Wizard's Academy</h3>
+                        <div class="project-meta">
+                            <span>👤 Student Example</span>
+                            <span>📅 Term 4, 2024</span>
+                        </div>
+                        <p>
+                            Attend classes at a magical academy, learn spells, and use them to complete challenges. Features a spell-learning system and moral choice consequences.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Spell System</span>
+                            <span class="tag">Moral Choices</span>
+                            <span class="tag">Character Growth</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🎭</div>
+                    <div class="project-content">
+                        <h3>Time Traveler's Dilemma</h3>
+                        <div class="project-meta">
+                            <span>👤 Student Example</span>
+                            <span>📅 Term 4, 2024</span>
+                        </div>
+                        <p>
+                            Travel through different time periods and make choices that affect history. Features a branching storyline with consequences that span across eras.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Complex Branching</span>
+                            <span class="tag">Time Mechanics</span>
+                            <span class="tag">Consequences</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h3>🌟 Want to See Your Project Here?</h3>
+                <p>
+                    Complete your Python adventure game project and submit it for a chance to be featured! 
+                    Outstanding projects that demonstrate creativity, technical skill, and great storytelling 
+                    will be showcased here for future students to admire.
+                </p>
+                <a href="contact.html" class="cta-button">Contact Teacher About Submissions</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Prahran High School - Year 9 Engineering</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                <a href="index.html" style="color: var(--teal); text-decoration: none;">← Back to Home</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

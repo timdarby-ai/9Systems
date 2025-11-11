@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Programming | Year 9 Engineering</title>
+    <style>
+        :root {
+            --teal: #14B8A6;
+            --teal-dark: #0D9488;
+            --charcoal: #2C3E50;
+            --charcoal-light: #34495E;
+            --burnt-orange: #E67E22;
+            --burnt-orange-dark: #D35400;
+            --light-bg: #F8F9FA;
+            --white: #FFFFFF;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+
+        nav {
+            background-color: var(--charcoal);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 1rem 0;
+            text-decoration: none;
+        }
+
+        nav .logo span {
+            color: var(--teal);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 1rem 0;
+            display: block;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: var(--teal);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            background: var(--white);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb a {
+            color: var(--teal);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: var(--text-light);
+            margin: 0 0.5rem;
+        }
+
+        .unit-header {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .unit-header .icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .unit-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .unit-header .meta {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .unit-header .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .overview-section {
+            background: var(--white);
+            padding: 3rem 0;
+        }
+
+        .overview-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .overview-content h2 {
+            color: var(--charcoal);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .overview-content p {
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .learning-outcomes {
+            background: var(--light-bg);
+            padding: 3rem 0;
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .outcome-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--teal);
+        }
+
+        .outcome-card h3 {
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .outcome-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .outcome-card ul li {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .outcome-card ul li::before {
+            content: '✓';
+            color: var(--teal);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 3rem 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--teal);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .resource-category {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .resource-category h3 {
+            color: var(--charcoal);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--teal);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resource-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem;
+            background: var(--light-bg);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .resource-item:hover {
+            background: #E8F4F3;
+            transform: translateX(5px);
+        }
+
+        .resource-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .resource-icon {
+            font-size: 2rem;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .resource-details h4 {
+            color: var(--charcoal);
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+
+        .resource-details p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .download-btn {
+            background: var(--teal);
+            color: var(--white);
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .download-btn:hover {
+            background: var(--teal-dark);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .video-item {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-item .video-info {
+            padding: 1rem;
+        }
+
+        .video-item h4 {
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+        }
+
+        .video-item p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .project-assessment {
+            background: var(--light-bg);
+            padding: 3rem 0;
+        }
+
+        .assessment-box {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem;
+            max-width: 900px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--burnt-orange);
+        }
+
+        .assessment-box h3 {
+            color: var(--charcoal);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .requirement-item {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--teal);
+        }
+
+        .requirement-item h4 {
+            color: var(--charcoal);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .requirement-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .requirement-item ul li {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .requirement-item ul li::before {
+            content: '→';
+            color: var(--teal);
+            position: absolute;
+            left: 0;
+        }
+
+        footer {
+            background: var(--charcoal);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--charcoal);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .unit-header h1 {
+                font-size: 2rem;
+            }
+
+            .unit-header .meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .outcomes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Year 9 <span>Engineering</span></a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Student Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <strong>Python Programming</strong>
+        </div>
+    </div>
+
+    <section class="unit-header">
+        <div class="container">
+            <div class="icon">🐍</div>
+            <h1>Python Programming</h1>
+            <div class="meta">
+                <div class="meta-item">📚 8-12 Lessons</div>
+                <div class="meta-item">🎮 Text Adventure Games</div>
+                <div class="meta-item">⏱️ 5-6 Weeks</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="overview-section">
+        <div class="container">
+            <div class="overview-content">
+                <h2>Unit Overview</h2>
+                <p>
+                    Welcome to the Python Programming unit! In this exciting journey, you'll learn the fundamentals of programming by creating your own interactive text adventure game. This project-based approach makes learning Python engaging and practical.
+                </p>
+                <p>
+                    You'll start with the basics—printing text and storing information in variables—and progressively build up to creating complete, playable games with branching storylines, character stats, inventory systems, and multiple endings. By the end of this unit, you'll have a solid foundation in programming concepts that you can apply to any coding project.
+                </p>
+                <p>
+                    <strong>What makes this unit special?</strong> Instead of just learning abstract programming concepts, you'll see immediate results as your game comes to life. Every new skill you learn adds another feature to your game, making the learning process fun and rewarding.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="learning-outcomes">
+        <div class="container">
+            <h2>Learning Outcomes</h2>
+            <div class="outcomes-grid">
+                <div class="outcome-card">
+                    <h3>📝 Essential Skills</h3>
+                    <ul>
+                        <li>Use print() to display text and create narratives</li>
+                        <li>Store and manipulate data with variables</li>
+                        <li>Get user input with input() function</li>
+                        <li>Create branching stories with if/elif/else</li>
+                        <li>Use the random module for chance events</li>
+                        <li>Track game state (health, score, inventory)</li>
+                    </ul>
+                </div>
+                <div class="outcome-card">
+                    <h3>⚡ Enrichment Skills</h3>
+                    <ul>
+                        <li>Use dictionaries to manage character attributes</li>
+                        <li>Create inventory systems with dictionaries</li>
+                        <li>Organize code with functions</li>
+                        <li>Implement input validation</li>
+                        <li>Create visual game maps</li>
+                        <li>Design complex branching narratives</li>
+                    </ul>
+                </div>
+                <div class="outcome-card">
+                    <h3>🚀 Extension Skills</h3>
+                    <ul>
+                        <li>Create classes for game objects</li>
+                        <li>Use object-oriented programming principles</li>
+                        <li>Implement class methods and attributes</li>
+                        <li>Design reusable code structures</li>
+                        <li>Build advanced game mechanics</li>
+                        <li>Create professional-grade documentation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources">
+        <div class="container">
+            <h2>Unit Resources</h2>
+
+            <div class="resource-category">
+                <h3>📚 Lesson Materials</h3>
+                <div class="resource-list">
+                    <div class="resource-item">
+                        <div class="resource-info">
+                            <div class="resource-icon">📊</div>
+                            <div class="resource-details">
+                                <h4>Introduction to Python - Lesson Slides</h4>
+                                <p>Complete lesson presentation with examples and activities</p>
+                            </div>
+                        </div>
+                        <a href="resources/python/Introduction_to_Python.pdf" class="download-btn">View PDF</a>
+                    </div>
+                    <div class="resource-item">
+                        <div class="resource-info">
+                            <div class="resource-icon">📖</div>
+                            <div class="resource-details">
+                                <h4>Python Unit Curriculum Design</h4>
+                                <p>Complete 8-12 lesson unit overview and learning outcomes</p>
+                            </div>
+                        </div>
+                        <a href="resources/python/Python_Unit_Curriculum_Design.docx" class="download-btn">Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resource-category">
+                <h3>📋 Student Guides & Templates</h3>
+                <div class="resource-list">
+                    <div class="resource-item">
+                        <div class="resource-info">
+                            <div class="resource-icon">⚡</div>
+                            <div class="resource-details">
+                                <h4>Python Quick Reference Guide</h4>
+                                <p>Handy reference for all Python concepts from basics to classes</p>
+                            </div>
+                        </div>
+                        <a href="resources/python/Python_Quick_Reference_Guide.docx" class="download-btn">Download</a>
+                    </div>
+                    <div class="resource-item">
+                        <div class="resource-info">
+                            <div class="resource-icon">🗺️</div>
+                            <div class="resource-details">
+                                <h4>Game Planning Worksheet</h4>
+                                <p>Plan your text adventure with flowcharts and variable tracking</p>
+                            </div>
+                        </div>
+                        <a href="resources/python/Game_Planning_Worksheet.docx" class="download-btn">Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resource-category">
+                <h3>✅ Assessment Materials</h3>
+                <div class="resource-list">
+                    <div class="resource-item">
+                        <div class="resource-info">
+                            <div class="resource-icon">📝</div>
+                            <div class="resource-details">
+                                <h4>Python Adventure Game Assessment Task</h4>
+                                <p>Project requirements, rubric, and success criteria</p>
+                            </div>
+                        </div>
+                        <a href="resources/python/Python_Adventure_Game_Assessment.docx" class="download-btn">Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resource-category">
+                <h3>🎥 Video Tutorials</h3>
+                <div class="video-grid">
+                    <div class="video-item">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/kqtD5dpn9C8" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4>Python for Beginners</h4>
+                            <p>Get started with Python programming basics</p>
+                        </div>
+                    </div>
+                    <div class="video-item">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/DLn3jOsNRVE" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h4>Variables and Data Types</h4>
+                            <p>Learn how to store and use data in Python</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resource-category">
+                <h3>🔗 External Learning Resources</h3>
+                <div class="resource-list">
+                    <div class="resource-item">
+                        <div class="resource-info">
+                            <div class="resource-icon">💻</div>
+                            <div class="resource-details">
+                                <h4>Python.org Official Tutorial</h4>
+                                <p>Comprehensive Python documentation and tutorials</p>
+                            </div>
+                        </div>
+                        <a href="https://docs.python.org/3/tutorial/" target="_blank" class="download-btn">Visit Site</a>
+                    </div>
+                    <div class="resource-item">
+                        <div class="resource-info">
+                            <div class="resource-icon">🎮</div>
+                            <div class="resource-details">
+                                <h4>Codecademy Python Course</h4>
+                                <p>Interactive Python learning platform with hands-on exercises</p>
+                            </div>
+                        </div>
+                        <a href="https://www.codecademy.com/learn/learn-python-3" target="_blank" class="download-btn">Visit Site</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="project-assessment">
+        <div class="container">
+            <h2>Final Project Assessment</h2>
+            <div class="assessment-box">
+                <h3>🎮 Text Adventure Game Project</h3>
+                <p>
+                    Create a complete, functional text adventure game that demonstrates your programming skills. Your game should be engaging, well-structured, and show proper use of Python concepts.
+                </p>
+                
+                <div class="requirements-grid">
+                    <div class="requirement-item">
+                        <h4>Game Structure</h4>
+                        <ul>
+                            <li>Clear title and introduction</li>
+                            <li>Player can enter their name</li>
+                            <li>At least 5 decision points</li>
+                            <li>Multiple endings (min. 2)</li>
+                            <li>Clear win/lose conditions</li>
+                        </ul>
+                    </div>
+                    <div class="requirement-item">
+                        <h4>Programming Concepts</h4>
+                        <ul>
+                            <li>Variables for player data</li>
+                            <li>Input() for player choices</li>
+                            <li>If/elif/else statements</li>
+                            <li>String formatting</li>
+                            <li>Code comments</li>
+                        </ul>
+                    </div>
+                    <div class="requirement-item">
+                        <h4>User Experience</h4>
+                        <ul>
+                            <li>Clear prompts for input</li>
+                            <li>Input validation</li>
+                            <li>Engaging story</li>
+                            <li>Readable text formatting</li>
+                            <li>Playable start to finish</li>
+                        </ul>
+                    </div>
+                    <div class="requirement-item">
+                        <h4>Code Quality</h4>
+                        <ul>
+                            <li>Proper indentation</li>
+                            <li>Meaningful variable names</li>
+                            <li>No major bugs</li>
+                            <li>Logical code structure</li>
+                            <li>Clear documentation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p style="margin-top: 2rem; padding: 1.5rem; background: var(--light-bg); border-radius: 8px; border-left: 4px solid var(--burnt-orange);">
+                    <strong>📌 Remember:</strong> Download the full assessment document above for detailed rubrics, examples, and submission guidelines.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Prahran High School - Year 9 Engineering</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                <a href="index.html" style="color: var(--teal); text-decoration: none;">← Back to Home</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
